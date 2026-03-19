@@ -7,10 +7,9 @@
 /* Function Declarations */
 
 void delay(volatile unsigned int count);
-void gpio_init(void);
-void boot_signal(void);
-void breathing_signal(void);
-void sos_alert(void);
+void Boot_signal(void);
+void Breathing_signal(void);
+void SoS_Alert_signal(void);
 
 
 

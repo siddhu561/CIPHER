@@ -20,7 +20,7 @@ void Boot_signal() {
 void Breathing_signal() {
 	while (1) {
 		GPIOA->ODR ^= (1U << 5);
-		delay(50000);
+		delay(500000);
 	}
 }
 
@@ -30,23 +30,26 @@ void SoS_Alert_signal() {
 	if (~(GPIOC->IDR & (1U << 13))) {
 		for (int i = 0; i < 3; i++) {
 			GPIOA->BSRR |= (1U << 5);
-			delay(50000);
+			delay(500000);
 			GPIOA->BSRR |= (1U << 21);
-			delay(50000);
+			delay(500000);
 		}
 		//short blinks
 		for (int i = 0; i < 3; i++) {
 			GPIOA->BSRR |= (1U << 5);
-			delay(25000);
+			delay(250000);
 			GPIOA->BSRR |= (1U << 21);
-			delay(25000);
+			delay(250000);
 		}
 		//fast blinks
 		for (int i = 0; i < 3; i++) {
+			if (i == 0 ){
+				delay(500000);
+			}
 			GPIOA->BSRR |= (1U << 5);
-			delay(50000);
+			delay(500000);
 			GPIOA->BSRR |= (1U << 21);
-			delay(50000);
+			delay(500000);
 		}
 	}
 
@@ -64,5 +67,11 @@ int main() {
 	//set pin13 to input mode mode
 	GPIOC->MODER &= ~(1U << 26);
 	GPIOC->MODER &= ~(1U << 27);
+
+//	Breathing_signal();
+
+	SoS_Alert_signal();
+
+
 
 }

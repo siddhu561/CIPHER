@@ -45,10 +45,13 @@ void UART_INIT() {
 }
 
 char UART_RECIVE() {
-
+	while(!(USART2->SR & (1U<<5))){}
+	return USART2->DR ;
 }
 
 void UART_TRANSMIT() {
+		while(!(USART2->SR & (1U<<7))){}
+		USART2->DR =(ch[0] & 0xFF);
 
 }
 
